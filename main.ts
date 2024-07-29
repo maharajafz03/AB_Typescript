@@ -36,3 +36,8 @@ danger = ["mangai"];
 console.log(danger)
  console.log(luna)
  console.log(bike)
+
+
+ let kandaraoli: string =  "maga";
+
+ console.log(kandaraoli)
