@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Mydata from "./Mydata";
-import Dance from "./Dance";
+//import Dance from "./Dance";
 
 const Complain: React.FC = () => {
     const [count, setCount] = useState<number>(10); // State to manage user input
@@ -34,7 +34,7 @@ const Complain: React.FC = () => {
             />
             <button onClick={handleSubmit}>Submit</button>
             <Mydata manage={count} message={message} /> {/* Pass count and message as props */}
-            <Dance number={count}/>
+            {/* <Dance number={count}/> */}
             <p>Welcome back</p>
         </div>
     );

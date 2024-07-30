@@ -3,6 +3,7 @@ import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Complain from "./Complain"
 import Home from './Home';
 import About from './About'; // Import your About component
+//import Dog from './Dog';
 
 const App: React.FunctionComponent = () => {
   return (
@@ -19,7 +20,9 @@ const App: React.FunctionComponent = () => {
        <Route path="/complain" element={<Complain />} /> 
       </Routes>
     </Router>
-  );
+    
+);
+  
 };
 
 export default App;
