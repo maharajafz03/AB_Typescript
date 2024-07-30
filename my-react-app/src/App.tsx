@@ -15,7 +15,7 @@ const App: React.FunctionComponent = () => {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About name = {"raja"} age = {26} />} />
        <Route path="/complain" element={<Complain />} /> 
       </Routes>
     </Router>

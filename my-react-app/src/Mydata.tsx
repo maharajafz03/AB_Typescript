@@ -17,13 +17,13 @@ class Mydata extends Component<MyComponentProps, MyComponentState> {
 
     // Initialize state
     this.state = {
-      manage: props.manage || 28// Initialize state with prop value
+      manage: props.manage // Initialize state with prop value
     };
   }
 
   // Method to handle button click
-  handleClick = () => {
-    this.setState({ manage: this.state.manage + 1 });
+   handleClick = () => {
+    this.setState({ manage: this.state.manage + 87 });
   }
 
   render() {

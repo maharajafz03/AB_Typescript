@@ -1,14 +1,24 @@
 import React from "react";
+//import { PromptProps } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const About: React.FC = () => {
+
+type Mprops = {
+    name: string;
+    age: number
+}
+
+const About: React.FC<Mprops> = (props) => {
  
-    <Link to="/">Home</Link>
+    
 
     return (
-        
+        <div>
+        <p>props:`my name is {props.name} im {props.age} old`</p>
         <p>Hello in about</p>
-    
+        <Link to="/">Home</Link>    
+        </div>
+         
     )
 }
 
