@@ -11,7 +11,7 @@ route.get('/', (req: Request, res: Response) => {
 // Define the route for the /home path
 route.get('/home', (req: Request, res: Response) => {
     // Correctly define the path to the public directory
-    const filepath = path.join(__dirname, 'public', 'index.html'); // Specify the file you want to serve
+    const filepath = path.join(__dirname, 'Client', 'Home.tsx'); // Specify the file you want to serve
     res.sendFile(filepath);
 });
 
