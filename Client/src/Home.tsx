@@ -1,17 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
-//import Dog from "./AuthToggle";
+import { Link } from "react-router-dom"
+import React, { useState }  from "react"
+//import Snoop from "./AUTH/Snoop"
+import Mangai from "./Mangai"
+
 
 const Home: React.FC = () => {
     
-    //<Link to="/complain">complain</Link>
+    // <Link to="/complain">complain</Link>
+     
+    const [pages, setpages] = useState<boolean>(false)
+
+
+    const handleclick = () => {
+     setpages(prev => !prev)
+    }
+
 
     return (
         <div>
         <div>hello in home</div>
         <Link to="/complain">complain</Link>
-        {/* <Dog /> */}
+        
+        <button onClick={handleclick}>Show</button>
+        {pages ? <Mangai /> : false}
         </div>
+        
     )
 }
 
