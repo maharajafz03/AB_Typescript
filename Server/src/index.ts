@@ -1,11 +1,13 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cors());
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/mydatabase')
   .then(() => console.log('MongoDB connected'))
