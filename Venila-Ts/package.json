@@ -2,5 +2,9 @@
   "devDependencies": {
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.95.3",
+    "ethers": "^6.13.2"
   }
 }
