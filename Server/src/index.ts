@@ -1,74 +1,47 @@
 import express, { Request, Response } from 'express';
-import mongoose from 'mongoose';
-// import cors from 'cors';
-import bodyParser from 'body-parser';
+import { WebSocketServer } from 'ws';
+import http from 'http';
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// app.use(cors());
-// MongoDB connection
-mongoose.connect('mongodb://localhost:27017/mydatabase') => {
-  try {
-    console.log("connceted")
-  }
-  catch(err) {
-    console.log("not connected")
-  }
-}
-  
-
-// Middleware
-app.use(bodyParser.json());
-
-// Define a schema and model
-const dataSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true }
+// Define a simple route for testing HTTP server
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello from Express HTTP server!');
 });
 
-interface IData {
-  name: string;
-  email: string;
-}
+// Create an HTTP server using Express
+const server = http.createServer(app);
 
-const DataModel = mongoose.model<IData>('Data', dataSchema);
+// Create a WebSocket server on top of the HTTP server
+const wss = new WebSocketServer( server );
 
-// POST route to save data
-app.post('/api/data', async (req: Request, res: Response) => {
-  try {
-    const data = new DataModel(req.body);
-    await data.save();
-    res.status(201).json(data);
-  } catch (err) {
-    res.status(400).json({ error: (err as Error).message });
-  }
+// Handle WebSocket connections
+wss.on('connection', (ws) => {
+    console.log('New WebSocket client connected');
+
+    // Send a welcome message to the connected client
+    ws.send('Welcome to the WebSocket server!');
+
+    // Handle messages from clients
+    ws.on('message', (message) => {
+        console.log('Received:', message.toString());
+
+        // Broadcast the received message to all connected clients
+        wss.clients.forEach((client) => {
+            if (client.readyState === ws.OPEN) {
+                client.send(`Broadcast: ${message}`);
+            }
+        });
+    });
+
+    // Handle WebSocket close event
+    ws.on('close', () => {
+        console.log('Client disconnected');
+    });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Start the HTTP server and WebSocket on port 8080
+servers.listen(8080, () => {
+    console.log('Server running at http://localhost:8080');
 });
-
-
-
-// import express, { Request, Response, Router } from 'express';
-// import path from 'path';
-
-// const app = express();
-
-// const port = 20000;
-
-// app.use(express.static(path.join(__dirname, '../../client/dist')));
-
-
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
-// });
-
-
-// app.listen(port, () => {
-//     console.log("app is running on port")
-// });
-
