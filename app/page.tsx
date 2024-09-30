@@ -8,10 +8,14 @@ export default function home () {
   const handelClick = () => {
     router.push('/about')
   }
+  
+  
 
   return (
-    <div> <button onClick={handelClick}>home_page</button>
+    <div> <button onClick={handelClick} className="p-4 bg-black">home_page</button>
+      
   
     </div>
   )
+
 }

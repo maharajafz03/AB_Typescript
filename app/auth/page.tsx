@@ -1,46 +1,28 @@
-//"use client"
+'use client'
 
-import {  useState } from "react"
-import { PrismaClient } from "@prisma/client"
+import axios from 'axios';
+import { useState } from 'react';
 
+export default function MyComponent() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
-const prisma = new PrismaClient();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-export default function app () {
+    try {
+      const response = await axios.post('/api/user', { name, email });
+      console.log('User created successfully:', response.data);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
 
-
-    const [name, setName] = useState<string | number | undefined>()
-    const [email, setEmail] = useState<string | number | undefined>()
-
-
-    
-    const handleSubmit = async () => {
-        try {
-          // Create a new user in the database
-          const newUser = await prisma.user.create({
-            data: {
-              name: name || '', // Use empty string if name is undefined
-              email: email || '', // Use empty string if email is undefined
-            },
-          });
-          console.log("User created:", newUser);
-          // Optionally, reset the input fields after submission
-          setName(undefined);
-          setEmail(undefined);
-        } catch (error) {
-          console.error("Error creating user:", error);
-        }
-      };
-    
-
-    return (
-        <div>
-            <input type="name" placeholder="enter_emai" onChange={(e) => setName(e.target.value)}></input>
-            <input type="email" placeholder="enter_password" onChange={(e) => setEmail(e.target.value)}></input>
-            <button onClick={handleSubmit}>submit</button>
-
-            <p>name:  {name} </p> 
-            <p>email:  {email} </p>
-        </div>
-    )
+  return (
+    <form onSubmit={handleSubmit}>
+      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+      <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+      <button type="submit">Submit</button>
+    </form>
+  );
 }
